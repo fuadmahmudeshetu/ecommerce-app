@@ -116,6 +116,8 @@ const Product = () => {
         <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-600">
           <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolor aspernatur praesentium sint nobis commodi sapiente perspiciatis quia quod odit error incidunt ipsum ut provident molestias officia, quibusdam dolorem sequi laboriosam.</p>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam temporibus vel asperiores facere pariatur. Quidem beatae aperiam at itaque reprehenderit deleniti, est exercitationem, totam voluptatum amet error nobis provident alias.</p>
+
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Accusamus eaque ut magni veniam aliquam natus optio eligendi</p>
         </div>
       </div>
 
