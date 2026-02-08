@@ -2,13 +2,14 @@ import { useContext, useEffect, useState } from "react"
 import { ShopContext } from "../context/ShopContext"
 import { useParams } from "react-router";
 import { assets } from "../assets/assets";
+import RelatedProducts from "../components/RelatedProducts";
 
  
 const Product = () => {
 
   const { products } = useContext(ShopContext);
   const {productId} = useParams();
-  const [productDate, setProductData] = useState(false);
+  const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('');
   const currency = '$';
   const [size, setSize] = useState('');
@@ -28,7 +29,7 @@ const Product = () => {
     fetchProductData();
   }, [productId])
 
-  return productDate ? (
+  return productData ? (
     <div className="border-t-2 pt-10 transition-opacity ease-in duration-500 opacity-100">
       {/* Product Data Container */}
       <div className="flex gap-8 lg:gap-12 flex-col sm:flex-row">
@@ -37,7 +38,7 @@ const Product = () => {
         {/* sm:h-[500px] ensures the vertical scroll has a limit on desktop */}
         <div className="flex sm:flex-col overflow-x-auto sm:overflow-y-auto justify-start gap-3 sm:w-[18.7%] w-full order-2 sm:order-1 sm:h-[500px] no-scrollbar">
           {
-            productDate.image.map((item, index) => (
+            productData.image.map((item, index) => (
               <img
                 onClick={() => setImage(item)}
                 src={item}
@@ -60,7 +61,7 @@ const Product = () => {
 
         {/* --- Product Info --- */}
         <div className="flex-1 order-3">
-          <h1 className="font-semibold text-2xl lg:text-3xl text-gray-800 mt-2">{productDate.name}</h1>
+          <h1 className="font-semibold text-2xl lg:text-3xl text-gray-800 mt-2">{productData.name}</h1>
 
           {/* Stars/Rating */}
           <div className="flex items-center gap-1 mt-3">
@@ -73,18 +74,18 @@ const Product = () => {
           </div>
 
           <p className="mt-6 text-3xl font-bold text-orange-600">
-            {currency}{productDate.price}
+            {currency}{productData.price}
           </p>
 
           <p className="mt-5 text-gray-600 leading-relaxed md:w-11/12 text-sm lg:text-base">
-            {productDate.description}
+            {productData.description}
           </p>
 
           <div className="flex flex-col gap-4 my-8">
             <p>Select Size</p>
             <div className="flex gap-2">
               {
-                productDate.sizes.map((item, index) => {
+                productData.sizes.map((item, index) => {
                   return <button onClick={() => setSize(item)} className={`border py-2 px-4 bg-gray-100 ${item === size ? 'border-orange-500' : ''}`} key={index}>{item}</button>
                 })
               }
@@ -122,6 +123,8 @@ const Product = () => {
       </div>
 
       {/* Display Related Products */}
+
+      <RelatedProducts category={productData.category} subCategory={productData.subCategory}/>
 
     </div>
   ) : <div className="opacity-0"></div>
