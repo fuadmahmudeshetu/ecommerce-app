@@ -1,4 +1,6 @@
 import Title from "../components/Title"
+import CartTotal from "../components/CartTotal"
+import { assets } from "../assets/assets"
 
 const PlaceOrder = () => {
   return (
@@ -30,7 +32,52 @@ const PlaceOrder = () => {
       </div>
 
       {/* Right side of the checkout page */}
-      
+
+      <div className="mt-8">
+        <div className="mt-8 min-w-80">
+          <CartTotal />
+        </div>
+        <div className="mt-12">
+        {/* Payment method selection */}
+          <Title text1={'PAYMENT'} text2={'METHODS'} />
+          <div className="flex gap-3 flex-col lg:flex-row">
+
+            <div className="flex items-center gap-3 border border-gray-200 p-3 px-4 cursor-pointer rounded-xl hover:bg-blue-50/50 transition-all group">
+              {/* The Radio Circle */}
+              <div className="min-w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-blue-500 transition-colors">
+                {/* Inner dot - can be toggled with a 'selected' state */}
+                <div className="w-2 h-2 bg-blue-600 rounded-full scale-0 group-hover:scale-100 transition-transform"></div>
+              </div>
+
+              {/* The Image Tag (Untouched as requested) */}
+              <img src={assets.razorpay_logo} className="h-5 mx-4" alt="" />
+
+              {/* Optional: Add a label if you want more clarity, otherwise leave it */}
+              <span className="text-gray-400 text-[10px] font-medium ml-auto uppercase tracking-widest">
+                Secure
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 border border-gray-200 p-4 px-5 cursor-pointer rounded-xl hover:bg-slate-50 transition-all group">
+              {/* The Radio Circle */}
+              <div className="min-w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-indigo-500 transition-colors">
+                {/* Inside circle - show/hide based on selection */}
+                <div className="w-2.5 h-2.5 bg-indigo-600 rounded-full scale-0 group-hover:scale-100 transition-transform"></div>
+              </div>
+
+              {/* The Text Label */}
+              <div className="flex flex-col">
+                <p className="text-gray-800 text-sm font-semibold tracking-wide">
+                  CASH ON DELIVERY
+                </p>
+                <p className="text-gray-400 text-[11px] leading-tight">
+                  Pay with cash when your order arrives.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
