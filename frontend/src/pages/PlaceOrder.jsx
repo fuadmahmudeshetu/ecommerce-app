@@ -1,8 +1,14 @@
 import Title from "../components/Title"
 import CartTotal from "../components/CartTotal"
 import { assets } from "../assets/assets"
+import { useContext, useState } from "react"
+import { ShopContext } from "../context/ShopContext"
 
 const PlaceOrder = () => {
+
+  const [method, setMethod] = useState('cod');
+  const { navigate } = useContext(ShopContext);
+
   return (
     <div className="flex sm:flex-row flex-col justify-between px-12 gap-4 pt-5 sm:pt-14 min-h-[80vh] border-t">
       <div className="flex flex-col gap-4 w-full sm:max-w-[480px]">
@@ -38,13 +44,13 @@ const PlaceOrder = () => {
           <CartTotal />
         </div>
         <div className="mt-12">
-        {/* Payment method selection */}
+          {/* Payment method selection */}
           <Title text1={'PAYMENT'} text2={'METHODS'} />
           <div className="flex gap-3 flex-col lg:flex-row">
 
-            <div className="flex items-center gap-3 border border-gray-200 p-3 px-4 cursor-pointer rounded-xl hover:bg-blue-50/50 transition-all group">
+            <div onClick={()=>setMethod('razorpay')} className="flex items-center gap-3 border border-gray-200 p-3 px-4 cursor-pointer rounded-xl hover:bg-blue-50/50 transition-all group">
               {/* The Radio Circle */}
-              <div className="min-w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-blue-500 transition-colors">
+              <div className={`min-w-4 h-4 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-blue-500 transition-colors ${method === 'razorpay' ? 'bg-blue-600' : '' }`}>
                 {/* Inner dot - can be toggled with a 'selected' state */}
                 <div className="w-2 h-2 bg-blue-600 rounded-full scale-0 group-hover:scale-100 transition-transform"></div>
               </div>
@@ -58,9 +64,9 @@ const PlaceOrder = () => {
               </span>
             </div>
 
-            <div className="flex items-center gap-3 border border-gray-200 p-4 px-5 cursor-pointer rounded-xl hover:bg-slate-50 transition-all group">
+            <div onClick={()=>setMethod('cod')} className="flex items-center gap-3 border border-gray-200 p-4 px-5 cursor-pointer rounded-xl hover:bg-slate-50 transition-all group">
               {/* The Radio Circle */}
-              <div className="min-w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-indigo-500 transition-colors">
+              <div className={`min-w-5 h-5 border-2 border-gray-300 rounded-full flex items-center justify-center group-hover:border-indigo-500 transition-colors ${method === 'cod' ? 'bg-blue-600' : ''}`}>
                 {/* Inside circle - show/hide based on selection */}
                 <div className="w-2.5 h-2.5 bg-indigo-600 rounded-full scale-0 group-hover:scale-100 transition-transform"></div>
               </div>
@@ -76,6 +82,10 @@ const PlaceOrder = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="w-full text-end mt-8">
+          <button onClick={()=>navigate('/orders')} className="bg-black text-white px-16 py-3 text-sm">PLACE ORDER</button>
         </div>
       </div>
     </div>
