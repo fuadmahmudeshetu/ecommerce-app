@@ -3,39 +3,84 @@ import { assets } from '../assets/assets'
 
 const Add = () => {
   return (
-    <form>
-      <div className="flex flex-col w-full items-start gap-3">
-        <p>Upload Image</p>
+    <form className='flex flex-col w-full items-start gap-3'>
+      <div>
+        <p className='mb-2'>Upload Image</p>
 
-        <div className=" flex gap-2">
+        <div className="flex gap-2">
           <label htmlFor="image1">
             <img className='w-20' src={assets.upload_area} alt="" />
-            <input type="file" name="" id="image1" hidden/>
+            <input type="file" name="" id="image1" hidden />
           </label>
           <label htmlFor="image2">
             <img className='w-20' src={assets.upload_area} alt="" />
-            <input type="file" name="" id="image2" hidden/>
+            <input type="file" name="" id="image2" hidden />
           </label>
           <label htmlFor="image3">
             <img className='w-20' src={assets.upload_area} alt="" />
-            <input type="file" name="" id="image3" hidden/>
+            <input type="file" name="" id="image3" hidden />
           </label>
           <label htmlFor="image4">
             <img className='w-20' src={assets.upload_area} alt="" />
-            <input type="file" name="" id="image4" hidden/>
+            <input type="file" name="" id="image4" hidden />
           </label>
         </div>
       </div>
 
       <div className="w-full">
-        <p className='m-2'>Product Name</p>
+        <p className='mb-2'>Product Name</p>
         <input className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required name="" id="" />
       </div>
 
       <div className="w-full">
-        <p className='m-2'>Product Description</p>
+        <p className='mb-2'>Product Description</p>
         <textarea className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required name="" id="" />
       </div>
+
+      <div className='flex flex-col sm:flex-row gap-2 w-full sm:gap-8'>
+
+        <div>
+          <p className='mb-2'>Product Category</p>
+          <select className='w-full px-3 py-2' name="" id="">
+            <option value="Men">Men</option>
+            <option value="Woman">Woman</option>
+            <option value="Kids">Kids</option>
+          </select>
+        </div>
+
+        <div>
+          <p className='mb-2'>Sub Category</p>
+          <select className='w-full px-3 py-2' name="" id="">
+            <option value="Topwear">Topwear</option>
+            <option value="Bottomwear">Bottomwear</option>
+            <option value="Winterwear">Winterwear</option>
+          </select>
+        </div>
+
+        <div>
+          <p className='mb-2'>Product Price</p>
+          <input className='w-full px-3 py-2 sm:w-[120px]' type="number" name="" placeholder='25' id="" />
+        </div>
+
+      </div>
+
+      <div>
+        <p className='mb-2'>Product Sizes</p>
+        <div className='flex gap-3'>
+          <div className='bg-slate-200 px-3 py-1 cursor-pointer'>S</div>
+          <div className='bg-slate-200 px-3 py-1 cursor-pointer'>M</div>
+          <div className='bg-slate-200 px-3 py-1 cursor-pointer'>L</div>
+          <div className='bg-slate-200 px-3 py-1 cursor-pointer'>XL</div>
+          <div className='bg-slate-200 px-3 py-1 cursor-pointer'>XXL</div>
+        </div>
+      </div>
+
+      <div className='flex gap-2 mt-2'>
+        <input type="checkbox" id='bestseller' />
+        <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
+      </div>
+
+      <button type="submit" className='w-28 py-3 mt-4 bg-black text-white'>ADD</button>
 
     </form>
   )
