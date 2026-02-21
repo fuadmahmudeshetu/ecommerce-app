@@ -31,6 +31,12 @@ const Add = () => {
         <p className='m-2'>Product Name</p>
         <input className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required name="" id="" />
       </div>
+
+      <div className="w-full">
+        <p className='m-2'>Product Description</p>
+        <textarea className='w-full max-w-[500px] px-3 py-2' type="text" placeholder='Type here' required name="" id="" />
+      </div>
+
     </form>
   )
 }
