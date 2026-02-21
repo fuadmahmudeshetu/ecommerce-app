@@ -1,7 +1,13 @@
-import React from 'react'
+import { useState } from 'react'
 import { assets } from '../assets/assets'
 
 const Add = () => {
+
+  const [image1, setImage1] = useState(false);
+  const [image2, setImage2] = useState(false);
+  const [image3, setImage3] = useState(false);
+  const [image4, setImage4] = useState(false);
+
   return (
     <form className='flex flex-col w-full items-start gap-3'>
       <div>
@@ -9,19 +15,19 @@ const Add = () => {
 
         <div className="flex gap-2">
           <label htmlFor="image1">
-            <img className='w-20' src={assets.upload_area} alt="" />
+            <img className='w-20 cursor-pointer' src={assets.upload_area} alt="" />
             <input type="file" name="" id="image1" hidden />
           </label>
           <label htmlFor="image2">
-            <img className='w-20' src={assets.upload_area} alt="" />
+            <img className='w-20 cursor-pointer' src={assets.upload_area} alt="" />
             <input type="file" name="" id="image2" hidden />
           </label>
           <label htmlFor="image3">
-            <img className='w-20' src={assets.upload_area} alt="" />
+            <img className='w-20 cursor-pointer' src={assets.upload_area} alt="" />
             <input type="file" name="" id="image3" hidden />
           </label>
           <label htmlFor="image4">
-            <img className='w-20' src={assets.upload_area} alt="" />
+            <img className='w-20 cursor-pointer' src={assets.upload_area} alt="" />
             <input type="file" name="" id="image4" hidden />
           </label>
         </div>
@@ -41,7 +47,7 @@ const Add = () => {
 
         <div>
           <p className='mb-2'>Product Category</p>
-          <select className='w-full px-3 py-2' name="" id="">
+          <select className='w-full px-3 py-2 cursor-pointer' name="" id="">
             <option value="Men">Men</option>
             <option value="Woman">Woman</option>
             <option value="Kids">Kids</option>
@@ -50,7 +56,7 @@ const Add = () => {
 
         <div>
           <p className='mb-2'>Sub Category</p>
-          <select className='w-full px-3 py-2' name="" id="">
+          <select className='w-full px-3 py-2 cursor-pointer' name="" id="">
             <option value="Topwear">Topwear</option>
             <option value="Bottomwear">Bottomwear</option>
             <option value="Winterwear">Winterwear</option>
@@ -76,11 +82,11 @@ const Add = () => {
       </div>
 
       <div className='flex gap-2 mt-2'>
-        <input type="checkbox" id='bestseller' />
+        <input className='cursor-pointer' type="checkbox" id='bestseller' />
         <label className='cursor-pointer' htmlFor="bestseller">Add to bestseller</label>
       </div>
 
-      <button type="submit" className='w-28 py-3 mt-4 bg-black text-white'>ADD</button>
+      <button type="submit" className='w-28 py-3 mt-4 bg-black text-white cursor-pointer'>ADD</button>
 
     </form>
   )
