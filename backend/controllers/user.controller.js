@@ -1,15 +1,43 @@
 import validator from "validator"
 import bcrypt from "bcryptjs"
-import userModel from "../models/userModel.js";
-import  jwt  from "jsonwebtoken";
+import userModel from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
 const createToken = (id) => {
-    return jwt.sign({id}, process.env.JWT_SECRET)
+    return jwt.sign({ id }, process.env.JWT_SECRET)
 }
 
 // Route for user login
 const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
+        const user = await userModel.findOne({ email });
+
+        if (!user) {
+            return res.json({
+                success: false,
+                message: "User doesn't exists"
+            });
+        }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (isMatch) {
+            const token = createToken(user._id)
+            res.json({ success: true, token })
+        }
+        else {
+            res.json({ success: false, message: "Invalid Credentials" })
+        }
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success: false,
+            message: error.message
+        })
+    }
 }
 
 // Route for user register
@@ -18,10 +46,11 @@ const registerUser = async (req, res) => {
         const { name, email, password } = req.body;
 
         // checking user already exist or not
-        const exists = await userModel.findOne({email});
+        const exists = await userModel.findOne({ email });
         if (exists) {
-            return res.json({success: false, 
-                message:"User already exist"
+            return res.json({
+                success: false,
+                message: "User already exist"
             });
         }
 
@@ -62,7 +91,7 @@ const registerUser = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.json({
-            success:false,
+            success: false,
             message: error.message
         })
     }

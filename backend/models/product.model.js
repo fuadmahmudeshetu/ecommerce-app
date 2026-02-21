@@ -31,12 +31,12 @@ const productSchema = new mongoose.Schema({
         required: true
     },
 
-    size: {
+    sizes: {
         type: Array,
         required: true
     },
 
-    bestSeller: {
+    bestseller: {
         type: Boolean
     },
 
