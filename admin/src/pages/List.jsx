@@ -3,8 +3,9 @@ import { useEffect, useState } from "react"
 import { backendUrl, currency } from "../App";
 import { toast } from "react-toastify";
 
-const List = () => {
+const List = ({ token }) => {
   const [list, setList] = useState([]);
+  const [deletingId, setDeletingId] = useState(null);
 
   const fetchList = async () => {
     try {
@@ -20,6 +21,32 @@ const List = () => {
       toast.error(error.message);
     }
   }
+
+  const removeProduct = async (id, name) => {
+    const isConfirmed = window.confirm(`Delete "${name}" product?`);
+    if (!isConfirmed) return;
+
+    if (deletingId) return;
+
+    try {
+      setDeletingId(id);
+      const response = await axios.post(backendUrl + '/api/product/remove', { id }, { headers: { token } });
+
+      if (response.data.success) {
+        toast.success(response.data.message);
+        await fetchList();
+      } else {
+        toast.error(response.data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message)
+    } finally {
+      setDeletingId(null);
+    }
+  }
+
 
   useEffect(() => {
     fetchList();
@@ -51,7 +78,18 @@ const List = () => {
                     <p className="text-sm text-gray-500">{item.category}</p>
                     <p className="text-sm font-semibold text-gray-700">{currency}{item.price}</p>
                   </div>
-                  <button className="text-red-500 font-semibold text-lg px-2 cursor-pointer">×</button>
+                  <button
+                    onClick={() => removeProduct(item._id, item.name)}
+                    disabled={deletingId === item._id}
+                    title="Delete product"
+                    aria-label="Delete product"
+                    className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${deletingId === item._id
+                        ? 'bg-red-100 text-red-400 cursor-not-allowed'
+                        : 'bg-red-50 text-red-600 hover:bg-red-100 cursor-pointer'
+                      }`}
+                  >
+                    {deletingId === item._id ? 'Deleting...' : 'Delete'}
+                  </button>
                 </div>
 
                 <div className="hidden md:grid grid-cols-[1fr_3fr_1fr_1fr_1fr] items-center gap-2 py-2 px-4 border rounded bg-white">
@@ -59,7 +97,20 @@ const List = () => {
                   <p className="truncate">{item.name}</p>
                   <p>{item.category}</p>
                   <p>{currency}{item.price}</p>
-                  <button className="text-center text-red-500 font-semibold cursor-pointer">X</button>
+                  <div className="flex justify-center">
+                    <button
+                      onClick={() => removeProduct(item._id, item.name)}
+                      disabled={deletingId === item._id}
+                      title="Delete product"
+                      aria-label="Delete product"
+                      className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all ${deletingId === item._id
+                          ? 'bg-red-100 text-red-400 cursor-not-allowed'
+                          : 'bg-red-50 text-red-600 hover:bg-red-100 cursor-pointer'
+                        }`}
+                    >
+                      {deletingId === item._id ? 'Deleting...' : 'Delete'}
+                    </button>
+                  </div>
                 </div>
               </div>
             ))
